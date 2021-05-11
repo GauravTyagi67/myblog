@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block title %} BlogHome {% endblock title %}
+
+{% block js %}
+<script type="text/javascript">
+  let previews=document.getElementsByClassName('preview');
+      Array.from(previews).forEach((element)=>{
+          element.innerHTML=element.innerText;
+      })
+</script>
+{% endblock js %}
+
+{% block blogactive %} active {% endblock blogactive %} 
+
+{% block body %}
+
+<div class="container my-3">
+	<h2>Blog Post by Gaurav Tyagi</h2>
+  {% for post in allPosts %}
+  <div class="card mb-3">
+    <img src="/media/{{post.image}}" class="card-img-top" alt="..."><hr>
+    <div class="card-body">
+      <h5 class="card-title"><a class="text-primary" href="/blog/{{post.slug}}">{{post.title}}</a>Author By <span style="color: red; font-weight: bold;">{{post.author}}({{post.views}})</span></h5>
+      <p class="card-text">{{post.content|safe| truncatechars:300}}</p>
+      <a href="/blog/{{post.slug}}"role="button" class="btn btn-primary">Continue reading</a>
+    </div>
+  </div>
+    {% endfor %}
+</div>
+
+{% endblock body %}
